@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'static_pages/help'
 
   resources :users
+  
   resources :posts
+  
   root 'application#hello'
 
   # Example of regular route:
