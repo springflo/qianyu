@@ -1,4 +1,4 @@
-# RottenPotatoes demo app: getting started
+# Qianyu
 
 This app is associated with the free [online
 course](http://www.saas-class.org) and (non-free)
