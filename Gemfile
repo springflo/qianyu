@@ -28,6 +28,11 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+#Twitter 用户界面布局框架
+# gem 'bootstrap-will_paginate', '1.0.0'
+gem 'bootstrap-sass'
+
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -40,8 +45,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'themoviedb'
-    gem 'web-console', group: :development
+gem 'web-console', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -64,5 +68,4 @@ group :production do
   gem 'pg', '~> 0.21' # for Heroku deployment
   gem 'rails_12factor'
 end
-
 
