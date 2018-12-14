@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   
   resources :posts
   
-  root 'application#hello'
+  
+  root 'static_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
