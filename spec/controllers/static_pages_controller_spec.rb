@@ -6,6 +6,7 @@ RSpec.describe StaticPagesController, type: :controller do
     it "returns http success" do
       get :home
       expect(response).to have_http_status(:success)
+      # assert_select "title", "千语"
     end
   end
 
