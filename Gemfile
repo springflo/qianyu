@@ -78,7 +78,7 @@ group :production do
   # The Twelve-Factor App
   gem 'rails_12factor'
   
-  # web server for production
+  # web server for production 3.12 !!!
   gem 'puma', '~> 3.12'
 end
 

@@ -27,8 +27,8 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     if @user.save
+      log_in @user      # session[:user_id] = user.id
       flash[:success] = "Welcome!"
       redirect_to @user
     else
