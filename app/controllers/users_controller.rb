@@ -6,13 +6,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    redirect_to root_url and return unless @user.activated?
     # debugger
   end
 
@@ -31,9 +32,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user      # session[:user_id] = user.id
-      flash[:success] = "Welcome!"
-      redirect_to @user
+      # UserMailer.account_activation(@user).deliver_now
+      @user.send_activation_email
+      
+      flash[:info] = "请查收邮件以激活账号"
+      # log_in @user      # session[:user_id] = user.id
+      # flash[:success] = "Welcome!"
+      # redirect_to @user
+      redirect_to root_url
     else
       render 'new'
     end
