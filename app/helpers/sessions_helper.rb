@@ -26,6 +26,10 @@ module SessionsHelper
         @current_user = nil
     end
     
+    def current_user?(user)
+        user == current_user
+    end
+    
     # 返回当前用户
     def current_user
         # @current_user ||=  User.find_by(id: session[:user_id])
@@ -33,7 +37,7 @@ module SessionsHelper
             @current_user ||= User.find_by(id: user_id)
         elsif (user_id = cookies.signed[:user_id])
             user = User.find_by(id: user_id)
-            if user && user.authenticate?(cookies[:remember_token])
+            if user && user.authenticated?(cookies[:remember_token])
                 log_in user
                 @current_user = user
             end
@@ -43,6 +47,17 @@ module SessionsHelper
     # 如果用户已登录，返回 true，否则返回 false
     def logged_in?
         !current_user.nil?
+    end
+    
+    # 重定向到存储的地址或默认地址
+    def redirect_back_or(default)
+        redirect_to(session[:forwording_url] || default)
+        session.delete(:forwording_url)
+    end
+    
+    # 存储后面需要使用的地址
+    def store_location
+        session[:forwording_url] = request.original_url if request.get?
     end
     
 end

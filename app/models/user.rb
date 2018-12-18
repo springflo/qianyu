@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
     attr_accessor :remember_token
     
     has_many :posts
+    
     before_save {self.email = email.downcase }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     validates :email, length:{maximum:40}, presence: true,
@@ -11,7 +12,7 @@ class User < ActiveRecord::Base
     validates :username, length:{maximum:40}, presence: true
     
     has_secure_password
-    validates :password, length: {minimum: 6}, presence: true
+    validates :password, length: {minimum: 6}, presence: true, allow_nil: true
     
     
     # 返回指定字符串的哈希摘要
@@ -42,5 +43,7 @@ class User < ActiveRecord::Base
     def forget
         update_attribute(:remember_digest, nil)
     end
+    
+    
     
 end
