@@ -1,0 +1,8 @@
+<%= form_for(@post) do |f| %>
+  <%= render 'shared/error_messages', object:f.object %>
+  <div class="field">
+      <%= f.text_area :content, placeholder: "纵有千言万语,更与何人说？" %>
+      
+  </div>
+  <%= f.submit "发布", class: "btn btn-primary" %>
+<% end %>

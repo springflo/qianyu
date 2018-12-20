@@ -1,0 +1,13 @@
+<li id="post-<%= post.id %>">
+    <%= link_to gravatar_for(post.user, size: 50), post.user %>
+    <span class="user"><%= link_to post.user.username, post.user %></span>
+    <span class="content"><%= post.content %></span>
+    <span class="timestamp">
+        <!--发布与 <%= time_ago_in_words(post.created_at) %> 前.-->
+        发布于 <%= post.created_at.strftime("%F %T") %> 
+        <% if current_user?(post.user) %>
+            <%= link_to "删除", post, method: :delete, 
+                        data: { confirm: "确认删除？" } %>
+        <% end %>
+    </span>
+</li>

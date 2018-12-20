@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
     attr_accessor :remember_token, :activation_token, :reset_token
     
-    has_many :posts
+    has_many :posts, dependent: :destroy
+    
     
      # before_save {self.email = email.downcase }
     before_save :downcase_email
@@ -81,6 +82,13 @@ class User < ActiveRecord::Base
     # 如果修改密码请求超时了，返回ture
     def password_reset_expired?
         reset_sent_at < 2.hours.ago
+    end
+    
+    
+    # 实现动态流原型
+    def feed
+        # id 转义，避免SQL注入攻击
+        Post.where("user_id = ?", id)
     end
     
     private
