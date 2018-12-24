@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.0'
 #Twitter layouts  gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate', '~> 1.0'
+gem 'will_paginate', '3.1.6'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -51,9 +52,15 @@ gem 'web-console', group: :development
 # images represent 
 gem 'gravtastic'
 
-# index users page
+# Clearly specify the version number
 gem 'nokogiri', '~>1.8.1'
-gem 'will_paginate', '3.1.6'
+
+# image upload
+gem 'carrierwave', '~>1.2.3'
+
+# Adjust image size
+gem 'mini_magick', '~>4.9.2'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -74,7 +81,6 @@ group :development, :test do
 
   # Spring speeds up development by 
   # keeping your application running in the background.
-  # Read more: https://github.com/rails/spring
   gem 'spring'
 end
 
@@ -84,6 +90,9 @@ group :production do
   
   # The Twelve-Factor App
   gem 'rails_12factor'
+  
+  # image upload in production env
+  gem 'fog-aws', '~>3.3.0' 
   
   # web server for production 3.12 !!!
   gem 'puma', '~> 3.12'

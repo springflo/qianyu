@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 log
+
+# 忽略上传的测试图像
+/public/uploads
