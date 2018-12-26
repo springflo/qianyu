@@ -92,7 +92,9 @@ group :production do
   gem 'rails_12factor'
   
   # image upload in production env
-  gem 'fog-aws', '~>3.3.0' 
+  # gem 'fog'
+  # gem 'fog-aws'
+ 
   
   # web server for production 3.12 !!!
   gem 'puma', '~> 3.12'
