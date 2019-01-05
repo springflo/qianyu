@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   
   
   
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   
   resources :posts, only: [:create, :destroy] 
   
@@ -29,7 +33,7 @@ Rails.application.routes.draw do
   
   resources :password_resets, only: [:new, :create, :edit, :update]
   
-  
+  resources :relationships,   only: [:create, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

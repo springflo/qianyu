@@ -65,6 +65,22 @@ class UsersController < ApplicationController
     flash[:success] = "删除用户成功！"
     redirect_to users_url
   end
+  
+  
+  def following
+    @title = "关注"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page], per_page: 10)
+    render 'show_follow'
+  end
+  
+  def followers
+    @title = "粉丝"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page], per_page: 10)
+    render 'show_follow'
+  end
+  
 
   private
 
