@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
     default_scope -> { order(created_at: :desc) }
     mount_uploader :picture, PictureUploader
     # validates :title, length:{maximum:40}, presence: true
-    validates :content, length:{maximum:10000}, presence: true
+    validates :content, length:{maximum:140}, presence: true
     validates :user_id, presence: true
     # validate :picture_size #will be a bug if no picture
     
@@ -15,9 +15,5 @@ class Post < ActiveRecord::Base
         #         errors.add(:picture, "图像应该小于 5MB")
         #     end
         # end
-    
-    
-    
-    
     
 end

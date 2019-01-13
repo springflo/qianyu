@@ -6,12 +6,12 @@ class AccountActivationController < ApplicationController
             # user.update_attribute(:activated_at, Time.zone.now)
             user.activate
             
-            log_in user
-            flash[:success] = "账号已激活！"
-            redirect_to user
+            # log_in user
+            flash[:success] = "账号已激活"
+            # redirect_to login_url
         else 
             flash[:danger] = "无效激活"
-            redirect_to root_url
+            # redirect_to root_url
         end
     end
 end

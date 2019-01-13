@@ -29,7 +29,7 @@ class PasswordResetsController < ApplicationController
     if params[:user][:password].empty?
       @user.errors.add(:password, "不能为空")
       render 'edit'
-    elsif @user.update_attributes(user.params)
+    elsif @user.update_attributes(user_params)
       log_in @user
       @user.update_attribute(:reset_digest, nil)
       flash[:success] = "密码重置成功！"

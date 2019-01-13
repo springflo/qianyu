@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
     
     # 如果修改密码请求超时了，返回ture
     def password_reset_expired?
-        reset_sent_at < 2.hours.ago
+        reset_send_at < 2.hours.ago
     end
     
     
@@ -129,7 +129,8 @@ class User < ActiveRecord::Base
       # 创建并赋值激活令牌和摘要
       def create_activation_digest
           self.activation_token = User.new_token
-          self.activation_digest = User.digest(activation_digest)
+        #   self.activation_digest = User.digest(activation_digest)
+        self.activation_digest = BCrypt::Password.create(activation_token)
       end
      
     

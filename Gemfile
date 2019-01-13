@@ -65,17 +65,12 @@ gem 'mini_magick', '~>4.9.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  gem 'rspec-rails'
-  gem 'guard-rspec'
-  
-  # build simulation data
-  gem 'factory_girl_rails','4.7.0'
-  gem 'faker','1.6.6'
   
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-
+  
+  gem 'rspec-rails'
+  gem 'guard-rspec'
   # Access an IRB console on exception pages or by using <%= console %> in views
   # gem 'web-console', '~> 2.0'
 
@@ -83,6 +78,18 @@ group :development, :test do
   # keeping your application running in the background.
   gem 'spring'
 end
+
+group :test do
+  # build simulation data
+  gem 'factory_girl_rails','4.7.0'
+  gem 'faker','1.6.6'
+  gem 'webrat', '~>0.7.3'
+  gem 'spork', '~>0.9.1'
+  #Capybara is an integration testing tool for rack based web applications. 
+  # It simulates how a user would interact with a website
+  gem 'capybara', '~>2.2.0'
+end
+
 
 
 group :production do

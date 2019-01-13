@@ -52,7 +52,10 @@ RSpec.configure do |config|
   
   # FactoryGirl
   config.include FactoryGirl::Syntax::Methods
-
+  
+  def test_sign_in(user)
+    controller.log_in(user)
+  end
   
   
 end
