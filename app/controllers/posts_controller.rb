@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: [:creat, :destroy]
+  before_action :logged_in_user, only: [:creat, :destroy, :thumb]
   before_action :correct_user, only: :destroy
  
   def create
@@ -20,6 +20,31 @@ class PostsController < ApplicationController
     flash[:success] = "文章删除成功"
     redirect_to request.referrer || root_url
   end
+  
+  # Ajax 处理微博点赞
+  def thumb
+    # debugger
+    @thumb = Thumb.find_by(user_id: params[:user_id], post_id: params[:id])
+    @post = Post.find(params[:id])
+    if @thumb.nil?
+      @thumb = Thumb.create(user_id: params[:user_id], post_id: params[:id], 
+                is_thumb: true)
+      @post.thumbs_count +=1           
+    elsif !!@thumb.is_thumb
+      @thumb.is_thumb = false
+      @post.thumbs_count -=1
+    else
+      @thumb.is_thumb = true
+      @post.thumbs_count +=1 
+    end
+    @thumb.save!
+    @post.save!
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js
+    end
+  end
+  
 
   private
 

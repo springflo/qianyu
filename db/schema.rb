@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190104070609) do
+ActiveRecord::Schema.define(version: 20190119114640) do
 
   create_table "posts", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "picture"
+    t.integer  "responses_count", default: 0
+    t.integer  "thumbs_count",    default: 0
   end
 
   add_index "posts", ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
@@ -33,6 +35,28 @@ ActiveRecord::Schema.define(version: 20190104070609) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "responses", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "responses", ["post_id"], name: "index_responses_on_post_id"
+  add_index "responses", ["user_id"], name: "index_responses_on_user_id"
+
+  create_table "thumbs", force: :cascade do |t|
+    t.boolean  "is_thumb",   default: false
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "thumbs", ["post_id"], name: "index_thumbs_on_post_id"
+  add_index "thumbs", ["user_id"], name: "index_thumbs_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
