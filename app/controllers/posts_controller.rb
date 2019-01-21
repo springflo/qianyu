@@ -2,6 +2,8 @@ class PostsController < ApplicationController
   before_action :logged_in_user, only: [:creat, :destroy, :thumb]
   before_action :correct_user, only: :destroy
  
+ 
+  #POST /posts(.:format) 
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
@@ -21,28 +23,41 @@ class PostsController < ApplicationController
     redirect_to request.referrer || root_url
   end
   
+  # post GET    /posts/:id(.:format) 
+  def show
+    @post = Post.find(params[:id])
+    @comments = @post.comments.paginate(page: params[:page], per_page: 5)
+    if @comment.nil?
+      @comment = Comment.new
+    end
+  end
+  
+  
+  # thumb_post  GET  /posts/:id/thumb(.:format)
   # Ajax 处理微博点赞
   def thumb
     # debugger
     @thumb = Thumb.find_by(user_id: params[:user_id], post_id: params[:id])
-    @post = Post.find(params[:id])
     if @thumb.nil?
       @thumb = Thumb.create(user_id: params[:user_id], post_id: params[:id], 
                 is_thumb: true)
-      @post.thumbs_count +=1           
     elsif !!@thumb.is_thumb
       @thumb.is_thumb = false
-      @post.thumbs_count -=1
     else
       @thumb.is_thumb = true
-      @post.thumbs_count +=1 
     end
     @thumb.save!
-    @post.save!
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js
     end
+  end
+  
+  
+  def comment
+  end
+  
+  def reply
   end
   
 
@@ -50,7 +65,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      # params.require(:post).permit(:title, :content)
       params.require(:post).permit(:content, :picture)
     end
     

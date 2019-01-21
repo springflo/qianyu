@@ -1,54 +1,33 @@
 <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 
 <li id="post-<%= post.id %>">
-    <%= link_to gravatar_for(post.user, size: 50), post.user %>
-    <span class="user"><%= link_to post.user.username, post.user %></span>
+  <%= link_to gravatar_for(post.user, size: 50), post.user %>
+  <span class="user"><%= link_to post.user.username, post.user %></span>
+   
+   
+  <span class="content">
+    <%= post.content %>
+    <%= image_tag post.picture.url if post.picture? %>
+  </span>
     
-    <span class="content">
-        <%= post.content %>
-        <%= image_tag post.picture.url if post.picture? %>
-    </span>
+  <span class="timestamp">
+    <%= post.get_created_at %> 
+    <% if current_user?(post.user) %>
+      <%= link_to "删除", post, method: :delete, 
+                    data: { confirm: "确认删除？" } %>
+    <% end %>
+  </span>
     
-    <span class="timestamp">
-        发布于 <%= post.created_at.strftime("%F %T") %> 
-        <% if current_user?(post.user) %>
-            <%= link_to "删除", post, method: :delete, 
-                        data: { confirm: "确认删除？" } %>
-        <% end %>
-    </span>
+  <span class="comment-count pull-right">
+    <a href="<%= post_path(post)%>"><i class="fa fa-comment-o" style="padding-right: 15px;">
+    <!-- 获取评论数 -->
+    <%= "#{post.comments.count}" %>
+    </i>
+    </a>
     
-    
-    
-    <span class="response-count pull-right">
-        <a data-remote="true"><i class="fa fa-comment-o" style="padding-right: 15px;">
-        <!-- 获取评论数 -->
-        <%= "#{post.responses_count}" %>
-        </i></a>
-        
-        <!-- 先判断当前是否有用户登录，再判断用户是否为此帖子点过赞-->
-        <% if @current_user && post.thumbed?(@current_user) %>
-            <a data-remote="true"
-                href="<%= thumb_post_path(id: post.id, user_id: @current_user)%>" 
-                        id="reduce" class="fa fa-thumbs-up"  
-                        onclick="praiseReplay(this)">
-                <%= "#{post.thumbs_count}"%>
-            </a>
-        <%elsif @current_user %>
-            <a data-remote="true"
-                href="<%= thumb_post_path(id: post.id, user_id: @current_user)%>" 
-                        id="reduce" class="fa fa-thumbs-o-up"
-                        onclick="praiseReplay(this)">
-                <%= "#{post.thumbs_count}"%>
-            </a>
-          <!-- 没有账户登录时的情况 -->
-        <% else %>
-            <a data-remote="true" href="<%= login_path%>" 
-                class="fa fa-thumbs-o-up" onclick="alert('您还未登录，请先登录')">
-              <%= "#{post.thumbs_count}"%>
-            </a>
-        <% end %>
-        
-    </span>
+    <%= render partial: 'posts/thumb', locals: { post: post } %>
+  </span>
+
 
     
 </li>

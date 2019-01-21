@@ -11,3 +11,21 @@
       thumbTag.innerHTML = " " + (thumbTag.innerHTML.match(/\d+/)-(-1));
       
       
+# @outIn=(comment_id,reply_id)->
+#       var coReply,coA;
+#       //coReply为回复框对象
+#       coReply = document.getElementById("co-reply" + comment_id)
+#       //coA为回复a标签对象
+#       coA = document.getElementById("reply" + reply_id)
+#       if(coReply.style.display == "none")
+#         coReply.style.display = "block"
+#         coA.innerHTML = "取消回复"
+
+#       else
+#         coReply.style.display = "none"
+#         coA.innerHTML = "回复"
+      
+
+
+      
+      

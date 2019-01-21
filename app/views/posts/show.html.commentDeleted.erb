@@ -20,9 +20,8 @@
     <div class="time_right padding-thumb">
       <!-- 锚点定位，点击会定位到id为co-point的元素 -->
       <a href="#co-point"><i class="fa fa-comment-o">
-      <%= "#{@post.comments.count}" %>
+      <%= "#{@post.comments_count}" %>
       </i></a>
-      
       <!-- 加载partial文件，传递@post参数 -->
       <%= render partial: 'posts/thumb', locals: { post: @post } %>
     </div>
@@ -30,7 +29,7 @@
 
   <%= render partial: 'shared/comment_form', locals: { post: @post} %>
   
-  <HR width="100%" color=#987cb9>
+  <HR width="100%" color=#987cb9 "liebiao">
 
 
   <div id="data_content">
@@ -38,35 +37,44 @@
     <% @comments.each do |comment| %>
     <div class="reply clearfix">
       <div class="body">
+        <!--评论status为0时代表正常显示，不为0是代表已经被删除，-->
+        <!--被删除的评论需要显示为「该评论已删除」-->        
       <span id="content_<%= comment.id %>">
         <a ><%= link_to comment.user.username, comment.user %></a> : 
+        <% if comment.status == 0 %>
           <%= comment.content %>
+        <% else %>
+          <font class="delete-content">该评论已删除</font>
+        <% end %>
       </span>
       <div class="time_right" id="time_<%= comment.id %>">
          <!--获取评论的创建时间 -->
         <%= comment.get_created_at %>
-        <a id="comment<%= comment.id %>" 
-          onclick="outInComment(<%=comment.id%>)">回复</a>
-        <% if current_user?(comment.user) %>
-           | <%= link_to "删除", comment, method: :delete, 
-                      data: { confirm: "确认删除？" } %>
+         <!--已被删除的帖子后面不显示回复按钮 -->
+        <% if comment.status == 0 %>
+          <a id="reply<%= comment.id %>" 
+            onclick="outIn(<%=comment.id%>,<%=comment.id%>)">回复</a>|
+          <% if current_user?(comment.user) %>
+            <%= link_to "删除", comment, method: :delete, 
+                        data: { confirm: "确认删除？" } %>
+          <% end %>              
         <% end %>
-  
+      
       </div>
-      <%= render partial: 'shared/reply_comment_form', 
-            locals: { comment: comment} %> 
-            
+        
         <div id="reply_page_<%= comment.id %>">
           <% @reply = Reply.where(comment_id: comment.id) %>
           <!-- 默认只展示两条回复，查看更多回复，点击查看更多回复-->
           <% @reply.limit(2).each do |re| %>
-              
             <div class="re-reply">  
-              <a><%= link_to re.user.username, re.user %></a>
-                回复
-              <a><%= link_to re.get_replied_user.username, re.get_replied_user %></a>: 
+              <a><a ><%= link_to re.user.username, re.user %></a>
+                回复:
               <span id="content_<%= re.id %>">
-                  <%= re.content %>
+                <% if re.status == 0 %>
+                  <span><%= re.content %></span>
+                <% else %>
+                  <span class="delete-content">该回复已删除</span>
+                <% end %>
               </span>
               <div class="time_right">
                 <%= re.get_created_at %>
@@ -74,37 +82,30 @@
                 <% if re.status == 0 %>
                 <!--   outIn方法控制回复框-->
                   <a id="reply<%= re.id %>" 
-                    onclick="outInReply(<%=re.id%>)"> 回复</a>
-                  <% if current_user?(re.user) %>
-                     | <%= link_to "删除", re, method: :delete, 
-                                data: { confirm: "确认删除？" } %>
-                  <% end %>
+                    onclick="outIn(<%= comment.id %>,<%=re.id%>)"> 回复</a>
                 <% end %>
                 </span>
               </div>
             </div>
-            
-            <%= render partial: 'shared/reply_reply_form', 
-              locals: { comment: comment, reply: re } %>
-            
           <% end %>
-          
-          <HR width="100%" color=#987cb9 >
-          <!-- 「查看更多回复」js控制-->
-          <% if @reply.count > 2 %>
-            <div align="center"><a id="spread-out" name="1" data-remote="true" href="#">
-              更多<%= @reply.count - 2 %>条回复 ↓</a></div>
-          <% end %>  
         </div>
-        
-
-        
+        <!-- 「查看更多回复」js控制-->
+        <% if @reply.count > 2 %>
+          <a id="spread-out" name="1" data-remote="true" href="#">
+            更多<%= @reply.count - 2 %>条回复 ↓</a>
+        <% end %>
       </div>
+      
+      <%= render partial: 'shared/reply_form', locals: { comment: comment} %>
+      
     </div>
     <%end%>
-    
-    <%= will_paginate @comments %>
   </div> 
+
+
+  
+
+  
   
  
 </div>

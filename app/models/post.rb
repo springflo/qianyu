@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+  
+    include ApplicationHelper
+    
     belongs_to :user
     
     default_scope -> { order(created_at: :desc) }
@@ -8,7 +11,7 @@ class Post < ActiveRecord::Base
     validates :user_id, presence: true
     # validate :picture_size #will be a bug if no picture
     
-    has_many :responses, dependent: :destroy
+    has_many :comments, dependent: :destroy
     has_many :thumbs, dependent: :destroy
     
     
@@ -21,8 +24,11 @@ class Post < ActiveRecord::Base
         return false
       end
     end
+   
+    def count_thumbs
+      Thumb.where(post_id:self.id,is_thumb:true).count
+    end 
 
-    
     
     
     private

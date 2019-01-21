@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
   
   include SessionsHelper
   
+  
+  
+  
+  
   private
   
     # 确保用户已登录
@@ -19,6 +23,7 @@ class ApplicationController < ActionController::Base
         redirect_to login_url
       end
     end
+    
     
   
   
