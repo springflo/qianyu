@@ -1,0 +1,14 @@
+    <%= link_to gravatar_for(post.user, size: 50), post.user %>
+    <span class="user"><%= link_to post.user.username, post.user %></span>
+    <div class="content">
+      <%= post.content %>
+      <%= image_tag post.picture.url if post.picture? %>
+    </div>
+    <span class="timestamp">
+      <%= post.get_created_at %> 
+      <% if current_user?(post.user) %>
+        <%= link_to "删除", post, method: :delete, 
+                    data: { confirm: "确认删除？" } %>
+      <% end %>
+    </span>
+  

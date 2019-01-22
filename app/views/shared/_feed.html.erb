@@ -1,7 +1,7 @@
 <% if @feed_items.any? %>
     <ol class="posts">
         <%= render @feed_items %>
-        
     </ol>
+    <HR width="100%" color=#987cb9>
     <%= will_paginate @feed_items %>
 <% end %>

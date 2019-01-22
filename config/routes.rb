@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-
+  get   'posts/replies/:comment_id/:point', to: 'posts#replies'
 
   root 'static_pages#home'
   

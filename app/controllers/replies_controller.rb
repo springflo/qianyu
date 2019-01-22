@@ -1,4 +1,9 @@
 class RepliesController < ApplicationController
+  before_action :logged_in_user, only: [:creat, :destroy]
+  before_action :correct_user, only: :destroy
+  
+  
+  
   def create
     @reply = current_user.replies.build(content: params[:content],
                 comment_id: params[:comment_id], replied_id: params[:replied_id])
@@ -18,4 +23,12 @@ class RepliesController < ApplicationController
     flash[:success] = "删除成功！"
     redirect_to request.referrer || root_url
   end
+  
+  private
+  
+    def correct_user
+      @reply = current_user.replies.find_by(id: params[:id])
+      redirect_to root_url if @reply.nil?
+    end  
+  
 end

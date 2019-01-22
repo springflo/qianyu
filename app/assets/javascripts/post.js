@@ -28,3 +28,10 @@ function outInReply(reply_id){
     coA.innerHTML = "回复";
     }
 }
+
+
+function addPoint(oldA){
+  var href = oldA.href;
+  var arr_point = href.split("/")[6];
+  oldA.href = href.substring(0, href.length - 1) + (parseInt(arr_point)+ 1);
+}

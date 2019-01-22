@@ -1,0 +1,20 @@
+        <span id="content_<%= comment.id %>">
+          <a ><%= link_to comment.user.username, comment.user %></a> : 
+            <%= comment.content %>
+        </span>
+        <!--<% if comment.status == 0 %>-->
+        <!--  <%= comment.content %>-->
+        <!--<% else %>-->
+        <!--  <font class="delete-content">该评论已删除</font>-->
+        <!--<% end %>-->
+        
+        <div class="time_right" id="time_<%= comment.id %>">
+           <!--获取评论的创建时间 -->
+          <%= comment.get_created_at %>
+          <a id="comment<%= comment.id %>" 
+            onclick="outInComment(<%=comment.id%>)">回复</a>
+          <% if current_user?(comment.user) %>
+             | <%= link_to "删除", comment, method: :delete, 
+                        data: { confirm: "确认删除？" } %>
+          <% end %>
+        </div>

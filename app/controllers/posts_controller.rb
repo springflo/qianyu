@@ -37,9 +37,9 @@ class PostsController < ApplicationController
   # Ajax 处理微博点赞
   def thumb
     # debugger
-    @thumb = Thumb.find_by(user_id: params[:user_id], post_id: params[:id])
+    @thumb = Thumb.find_by(user_id: current_user, post_id: params[:id])
     if @thumb.nil?
-      @thumb = Thumb.create(user_id: params[:user_id], post_id: params[:id], 
+      @thumb = current_user.thumbs.build(post_id: params[:id], 
                 is_thumb: true)
     elsif !!@thumb.is_thumb
       @thumb.is_thumb = false
@@ -47,23 +47,25 @@ class PostsController < ApplicationController
       @thumb.is_thumb = true
     end
     @thumb.save!
+    
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js
     end
   end
-  
-  
-  def comment
-  end
-  
-  def reply
+
+  # get posts/replies/:comment_id/:point
+  # post页面获取评论的更多回复
+  def replies
+    @comment_id = params[:comment_id]
+    @point = params[:point].to_i
+    @step = 8
+    @reply_part = Reply.where(comment_id: @comment_id)
   end
   
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:content, :picture)
     end
