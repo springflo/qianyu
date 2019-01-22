@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
     mount_uploader :picture, PictureUploader
     
     # validates :title, length:{maximum:40}, presence: true
-    validates :content, length:{maximum:140}, presence: true
+    validates :content, length:{maximum:400}, presence: true
     validates :user_id, presence: true
     # validate :picture_size #will be a bug if no picture
     
@@ -29,6 +29,7 @@ class Post < ActiveRecord::Base
       thumbs_count = Thumb.where(post_id:self.id,is_thumb:true).count
       self.update_attribute(:thumbs_count, thumbs_count)
     end 
+    
     
     private
         

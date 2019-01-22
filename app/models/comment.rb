@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
   belongs_to :post
   has_many :replies, dependent: :destroy
   
-  validates :content, presence: true, length:{maximum:140}
+  validates :content, presence: true, length:{maximum:400}
   validates :post_id, :user_id, presence: true
 
   default_scope -> { order(created_at: :desc) }

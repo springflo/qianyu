@@ -5,7 +5,7 @@ class Reply < ActiveRecord::Base
   belongs_to :comment
   belongs_to :user
   
-  validates :content, presence: true, length:{maximum:140}
+  validates :content, presence: true, length:{maximum:400}
   validates :comment_id, :user_id, :replied_id, presence: true
 
   def get_replied_user
