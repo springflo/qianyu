@@ -1,4 +1,11 @@
+<h1>千语</h1>
+
+<p>亲爱的<%= @user.username %>，欢迎使用千语网！</p>
+<p>打开<%= link_to "此链接", 
+edit_account_activation_url(@user.activation_token, email: @user.email) %>
+激活账号</p>
 
 
-<%= link_to "activate", edit_account_activation_url(@user.activation_token, email: @user.email) %>
-    
+  
+
+

@@ -1,0 +1,23 @@
+
+
+<% @reply_part[2+@step*(@point-1)...2+@step*@point].each do |re| %>
+  replyPage = document.getElementById("reply_page_<%= @comment_id %>");
+  newReply = document.createElement("div");
+  newReply.className = "re-reply";
+  
+  newReply.innerHTML = '<a><%= link_to re.user.username, re.user %></a>回复<a><%= link_to re.get_replied_user.username, re.get_replied_user %></a>:<span id="content_<%= re.id %>"><%= re.content %></span><div class="time_right"><%= re.get_created_at %><span id="time_<%= re.id %>"><% if re.status == 0 %><a id="reply<%= re.id %>" onclick="outInReply(<%=re.id%>)"> 回复</a><% if current_user?(re.user) %> | <%= link_to "删除", re, method: :delete, data: { confirm: "确认删除？" } %><% end %><% end %></span></div>'
+  $("#reply_page_<%= @comment_id %>").append(newReply)
+<% end %>
+
+<!--//找到「更多n条回复 ↓」a标签-->
+spreadOut = document.getElementById("spread-out_<%= @comment_id%>");
+<% space = @reply_part.count - @step*@point - 2 %>
+<% if space > 0 %>
+  spreadOut.innerHTML = "更多<%= space %>条回复 ↓"
+<% else %>
+  spreadOut.style.display = "none";
+<% end %>
+
+
+
+

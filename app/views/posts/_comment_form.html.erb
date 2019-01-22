@@ -1,0 +1,11 @@
+<%= form_for @comment,url: @comment  do |f| %>
+  <!-- 评框的id为co-point，id后面不需要加上每个评论的id，因为评论框会出现在页面最下方，与每个评论的位置没有关系 -->
+  <div><%= hidden_field_tag :post_id, post.id %></div>
+  <div class="comment-form" name="co-point" id="co-point">
+    <input type="text" name="content" placeholder="写下你的评论..." class="comment-text">
+    <div class="comment-submit">
+      <input type="submit" value="评论" class="submit-issue-button btn btn-primary">
+    </div>
+  </div>
+<% end %>
+

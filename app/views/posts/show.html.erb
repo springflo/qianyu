@@ -1,19 +1,49 @@
-<p id="notice"><%= notice %></p>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+<% provide(:title, "ヽ(✿ﾟ▽ﾟ)ノ") %>
+<h1>微语详情</h1>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="container" style="width: 60%">
+  <article class="clearfix">
+    <%= render partial: 'posts/post_content', locals: { post: @post } %>
+    
+    <div class="time_right padding-thumb">
+      <!-- 锚点定位，点击会定位到id为co-point的元素 -->
+      <a href="#co-point"><i class="fa fa-comment-o">
+      <%= "#{@post.comments.count}" %></i></a>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
+      <%= render partial: 'posts/thumb', locals: { post: @post } %>
+    </div>
+  </article>
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
+  <%= render partial: 'comment_form', locals: { post: @post} %>
+  
+  <HR width="100%" color=#987cb9>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+  <div id="data_content">
+     <!--遍历as_type为0的评论对象集合@comments -->
+    <% @comments.each do |comment| %>
+    <div class="reply clearfix">
+      <div class="body">
+        <%= render partial: 'posts/comment', locals: { comment: comment} %> 
+        
+        <%= render partial: 'reply_comment_form', locals: { comment: comment} %> 
+              
+        <%= render partial: 'replies', locals: { comment: comment} %> 
+              
+        <HR width="100%" color=#987cb9 >
+        <!-- 「查看更多回复」js控制-->
+        <div align="center">
+          <% if @reply.count > 2 %>
+              <a id="spread-out_<%=comment.id%>" name="1" data-remote="true" 
+                  href="/posts/replies/<%= comment.id %>/0" 
+                    onclick="addPoint(this)" >
+              更多<%= @reply.count - 2 %>条回复 ↓</a>
+          <% end %>
+        </div>
+        
+      </div>
+    </div>
+    <%end%>
+    <%= will_paginate @comments %>
+  </div>
+</div>

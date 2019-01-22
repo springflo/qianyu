@@ -1,0 +1,33 @@
+<div id="reply_page_<%= comment.id %>">
+  <% @reply = Reply.where(comment_id: comment.id) %>
+  <!-- 默认只展示两条回复，查看更多回复，点击查看更多回复-->
+  <% @reply.limit(2).each do |re| %>
+    <div class="re-reply">  
+      <a><%= link_to re.user.username, re.user %></a>
+        回复
+      <a><%= link_to re.get_replied_user.username, re.get_replied_user %></a>: 
+      <span id="content_<%= re.id %>">
+          <%= re.content %>
+      </span>
+      <div class="time_right">
+        <%= re.get_created_at %>
+        <span id="time_<%= re.id %>">
+        <% if re.status == 0 %>
+        <!--   outIn方法控制回复框-->
+          <a id="reply<%= re.id %>" 
+            onclick="outInReply(<%=re.id%>)"> 回复</a>
+          <% if current_user?(re.user) %>
+             | <%= link_to "删除", re, method: :delete, 
+                        data: { confirm: "确认删除？" } %>
+          <% end %>
+        <% end %>
+        </span>
+      </div>
+    </div>
+    
+    <%= render partial: 'reply_reply_form', 
+      locals: { comment: comment, reply: re } %>
+  <% end %>
+</div>  
+
+
