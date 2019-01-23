@@ -1,6 +1,7 @@
 <!--评论的回复-->
 
 <%= form_for( comment.replies.build)  do |f| %>
+  <%= render 'shared/error_messages', object:f.object %>
   <!-- 评框的id为co-point，id后面不需要加上每个评论的id，因为评论框会出现在页面最下方，与每个评论的位置没有关系 -->
   <div><%= hidden_field_tag :replied_id, comment.user_id %></div>
   <div><%= hidden_field_tag :comment_id, comment.id %></div>

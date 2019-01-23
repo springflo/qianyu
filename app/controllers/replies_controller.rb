@@ -12,7 +12,7 @@ class RepliesController < ApplicationController
     if @reply.save
       flash[:success] = "回复成功！"
     else 
-      flash[:warning] = "回复失败！"
+      flash[:warning] = "回复失败！请检查输入（不能为空，且少于400字符）！"
     end
     redirect_to request.referrer || root_url
   end

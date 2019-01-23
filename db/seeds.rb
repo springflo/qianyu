@@ -58,17 +58,17 @@ users_reply.each { |user|
     comments.each { |comment|
         content = Faker::Lorem.sentence(5)
         user.replies.create!(content: content, comment_id: comment.id,
-                replies_id: comment.user_id)
+                replied_id: comment.user_id)
     }
 }
 
 
-replies = Replies.all[1..20]
+replies = Reply.all[1..20]
 users_comment.each { |user|
     replies.each { |reply|
         content = Faker::Lorem.sentence(5)
-        user.replies.create!(content: content, comment_id: comment.id, 
-            replies_id: reply.user_id)
+        user.replies.create!(content: content, comment_id: reply.comment_id, 
+            replied_id: reply.user_id)
     }
 }
 

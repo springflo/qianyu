@@ -26,8 +26,11 @@ class Post < ActiveRecord::Base
     end
    
     def count_thumbs
-      thumbs_count = Thumb.where(post_id:self.id,is_thumb:true).count
-      self.update_attribute(:thumbs_count, thumbs_count)
+      thumbs_count = self.thumbs.count
+      if self.thumbs_count != thumbs_count
+        self.update_attribute(:thumbs_count, thumbs_count)
+      end
+      return thumbs_count
     end 
     
     

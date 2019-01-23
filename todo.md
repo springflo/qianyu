@@ -1,10 +1,27 @@
-Possible future changes
+TODO List
 -----------------------
 
-* version all gems in Gemfile
-* clean rails new
-* rails 5?
-* associated tests
-* remove time stamp format to be just a date
-* adjusting position of root in routes.rb?
-* replace mechanize with rspec? and include in boiler plate rspec in initial repo?
+* 搜索
+    * 只添加了ElasticSearch Gem，在导航栏上添加了搜索框
+    * 还没有实现功能
+* 消息
+    * 只在导航栏上添加了消息栏
+    * 还没有实现具体功能
+* 云存储
+    * 用于存储用户上传的图片
+    * Gem版本一直出错，没有实现
+* 标签
+    * 微博的标签
+    * 用户喜爱标签
+* 管理员
+    * 目前版本权限管理不够完善
+    * 微博、评论等设置了状态字段，留待完善权限
+* 单点登录
+    * 好像还挺麻烦
+* 收藏
+    * 收藏微博
+* 联系我们页面
+    * 未完善
+* 用户简介
+    * 用户简介、爱好等字段的添加和管理
+* 其他……

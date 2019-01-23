@@ -2,8 +2,14 @@ class PostsController < ApplicationController
   before_action :logged_in_user, only: [:creat, :destroy, :thumb]
   before_action :correct_user, only: :destroy
  
+  # GET /posts
+  def index
+    @posts = Post.all.sort_by {|p| -p.thumbs_count}.paginate(
+          page: params[:page], per_page: 10)
+  end
  
-  #POST /posts(.:format) 
+ 
+  # POST /posts(.:format) 
   def create
     @post = current_user.posts.build(post_params)
     if @post.save

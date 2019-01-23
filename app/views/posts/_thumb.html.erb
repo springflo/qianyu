@@ -4,19 +4,19 @@
         href="<%= thumb_post_path(id: post.id, user_id: @current_user)%>" 
                 id="reduce" class="fa fa-thumbs-up"  
                 onclick="praiseReplay(this)">
-        <%= "#{post.thumbs.count}"%>
+        <%= "#{post.count_thumbs}"%>
     </a>
 <%elsif @current_user %>
     <a data-remote="true"
         href="<%= thumb_post_path(id: post.id, user_id: @current_user)%>" 
                 id="reduce" class="fa fa-thumbs-o-up"
                 onclick="praiseReplay(this)">
-        <%= "#{post.thumbs.count}"%>
+        <%= "#{post.count_thumbs}"%>
     </a>
   <!-- 没有账户登录时的情况 -->
 <% else %>
     <a data-remote="true" href="<%= login_path%>" 
         class="fa fa-thumbs-o-up" onclick="alert('您还未登录，请先登录')">
-      <%= "#{post.thumbs.count}"%>
+      <%= "#{post.count_thumbs}"%>
     </a>
 <% end %>

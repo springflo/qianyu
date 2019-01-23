@@ -1,4 +1,85 @@
 <% provide(:title, "♪(^∇^*)") %>
-<h1>关于</h1>
-<p>参考 
-    <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>.</p>
+ 
+<div class="container" >
+  <div class="row">
+    <div class="col-sm-3">
+      <h2 align="center">关于我们</h2>
+      <h5 align="center">
+      <%= link_to image_tag("doggy.png", alt: "关于我们") %></h5>
+      <p align="center">长城脚下，雁栖湖畔</p>
+      <p align="center">安安心心写代码</p>
+      <h3>相关链接</h3>
+      <p>技术支持</p>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="https://c9.io/">
+              AWS Cloud9 集成开发环境</a></li>
+        <li><a href="https://www.heroku.com/">
+              Heroku 云平台</a></li>              
+        <li><a href="https://github.com/">
+              GitHub代码托管平台</a></li>
+        <li><a href="www.stackoverflow.com/">
+               Stack Overflow</a></li>
+        <li><a href="https://www.trustie.net/">
+              Trustie创新实践社区</a></li>
+        <li><a href="https://railstutorial-china.org/">
+              Ruby on Rails 教程</a></li>
+        <li><a href="http://www.runoob.com/ruby/ruby-tutorial.html">
+              Ruby 教程</a></li>
+        <li><a href="http://www.w3school.com.cn/tags/index.asp">
+              HTML 教程</a></li>
+        <li><a href="http://www.w3school.com.cn/js/">
+              JavaScript 教程</a></li>              
+        <li><a href="http://www.w3school.com.cn/css/index.asp">
+              CSS 教程</a></li>
+        <li><a href="http://www.w3school.com.cn/jquery/jquery_dom_add.asp">
+              jQuery 教程</a></li>
+        <li><a href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html">
+              Bootstrap 教程</a></li>
+      </ul>
+      <hr class="hidden-sm hidden-md hidden-lg">
+    </div>
+    
+    <div class="col-sm-8 whaleBackground jumbotron">
+      
+      <%= render partial: 'shared/introduction'%>
+      <br> <br>
+      <h3>网站架构</h3>
+      <br>
+      <h4>软件即服务——SaaS</h4>
+      <p class="text-indent">SaaS是Software-as-a-Service（软件即服务）的简称，
+      随着互联网技术的发展和
+      应用软件的成熟，在21世纪开始兴起的一种完全创新的软件应用模式。
+      它与“on-demand software”（按需软件)，the application service provider
+      (ASP，应用服务提供商)，hosted software(托管软件)所具有相似的含义。
+      它是一种通过Internet提供软件的模式，厂商将应用软件统一部署在自己的服务器上，
+      客户可以根据自己实际需求，通过互联网向厂商定购所需的应用软件服务，
+      按定购的服务多少和时间长短向厂商支付费用，并通过互联网获得厂商提供的服务。
+      用户不用再购买软件，而改用向提供商租用基于Web的软件，来管理企业经营活动，
+      且无需对软件进行维护，服务提供商会全权管理和维护软件，
+      软件厂商在向客户提供互联网应用的同时，也提供软件的离线操作和本地数据存储，
+      让用户随时随地都可以使用其定购的软件和服务。</p>
+      <br>
+      
+      <h4>面向服务的架构——SOA</h4>
+      <div class="fakeimg" align="center">
+        <%= link_to image_tag("architecture.png", alt: "架构") %></h2></div>
+      <p class="text-indent">面向服务的架构（SOA）是一个组件模型，
+      它将应用程序的不同功能单元
+      （称为服务）进行拆分，并通过这些服务之间定义良好的接口和契约联系起来。
+      接口是采用中立的方式进行定义的，它应该独立于实现服务的硬件平台、
+      操作系统和编程语言。这使得构建在各种各样的系统中的服务可以以一种统一和
+      通用的方式进行交互。</p>
+      <br>
+      
+      <h4>云时代的敏捷开发</h4>
+      <p class="text-indent">敏捷开发以用户的需求进化为核心，采用迭代、
+      循序渐进的方法进行软件开发。
+      在敏捷开发中，软件项目在构建初期被切分成多个子项目，
+      各个子项目的成果都经过测试，具备可视、可集成和可运行使用的特征……</p>
+      <p><a  href="http://www.saasbook.info/">了解更多>></a></p>
+      
+    </div>
+  </div>
+</div>
+
+

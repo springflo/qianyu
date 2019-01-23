@@ -1,0 +1,41 @@
+<% provide(:title,"Hi~ o(*￣▽￣*)ブ") %>
+
+<h1>微语精选</h1> 
+  <div class="row">
+      <aside class="col-md-4">
+          <% if logged_in? %>
+              <section class="user_info">
+                  <%= render 'shared/user_info' %>
+              </section>
+              
+              <section class="stats">
+                  <%= render 'shared/stats'%>
+              </section>
+
+          <% else %>
+            <h2>Hi~亲！</h2>   
+            <div class="well" align="center">
+              <p ><%= link_to "登录", login_path, 
+                      class: "btn btn-lg btn-primary" %></p>
+              <p ><%= link_to "注册", signup_path, 
+                      class: "btn btn-lg btn-primary" %></p>
+            </div>
+            <p align="center">
+              <%= link_to image_tag("juice.png", alt: "") %></p>
+          <%end%>
+      </aside>
+      
+      <div class="col-md-8">
+          <% if @posts.any? %>
+            <% @posts.each do |post|%>
+                <ol class="posts" >
+                  <%=render partial:'posts/post', locals: { post: post } %>
+                </ol>
+            <%end%>
+            <%= will_paginate %>
+          <%else %>
+          <%= render partial: 'shared/introduction'%>
+          <%end%>
+      </div>
+  </div>
+  

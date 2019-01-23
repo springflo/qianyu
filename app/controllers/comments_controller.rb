@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:success] = "评论成功！"
     else 
-      flash[:warning] = "评论失败！"
+      flash[:warning] = "评论失败！请检查输入（不能为空，且少于400字符）！"
     end
     redirect_to request.referrer || root_url
   end

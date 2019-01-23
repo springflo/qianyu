@@ -20,17 +20,24 @@
           <%= render 'shared/feed' %>
       </div>
   </div>
-
+  
 <% else %>
-    <div class="center jumbotron" >
-        <h1>欢迎来到千语！</h1>
-        <h2>
-            <!--This is the home page for the-->
-            <!--<a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>-->
-            <!--sample application.-->
-            <%= link_to image_tag("doggy.png", alt: "欢迎", size: 50) %>
-        </h2>
-        <%= link_to "注册新用户", signup_path, class: "btn btn-lg btn-primary" %>
-    </div>
+  <div class="row">
+      <aside class="col-md-4">
+      <h2>Hi~亲！</h2>   
+      <div class="well" align="center">
+          <p ><%= link_to "登录", login_path, 
+                  class: "btn btn-lg btn-primary" %></p>
+          <p ><%= link_to "注册", signup_path, 
+                  class: "btn btn-lg btn-primary" %></p>
+          <p ><%= link_to "随便逛逛", posts_path%></p>
+      </div>
+      <p align="center">
+          <%= link_to image_tag("juice.png", alt: "") %></p>
+      </aside>
+      
+      <%= render partial: 'shared/introduction'%>
+
+  </div>
 <% end %>
 
