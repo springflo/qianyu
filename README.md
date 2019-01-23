@@ -28,6 +28,7 @@ course](http://www.saas-class.org) and (non-free)
     * 我的 下拉菜单：个人主页、账号设置
         * 个人主页显示当前账户基本信息
         * 账号设置修改当前账户基本信息
+        * 用户头像采用第三方全球通用头像网站：[Gravatar](https://cn.gravatar.com/)
 * 首页左栏
     * 显示用户基本信息，微语发表框，可以发表图片
     * 
