@@ -13,7 +13,8 @@ course](http://www.saas-class.org) and (non-free)
 ### 注册
 [千语网注册](https://qianyu.herokuapp.com/signup)
 * 用户使用邮箱注册，通过生产环境的SendGrid发送激活邮件给用户
-    * 邮件发送超级慢，大约两分钟才能收到邮件，而且邮件很有可能会在你的垃圾箱里面
+    * 邮件发送超级慢，大约两分钟才能收到邮件（可能是因为没有充钱吧）
+    * 邮件很有可能会在你的垃圾箱里面
 
 ### 登录
 [千语网登录](https://qianyu.herokuapp.com/login)
