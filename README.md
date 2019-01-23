@@ -13,7 +13,7 @@ course](http://www.saas-class.org) and (non-free)
 ### 注册
 [千语网注册](https://qianyu.herokuapp.com/signup)
 * 用户使用邮箱注册，通过生产环境的SendGrid发送激活邮件给用户
-    * 邮件发送超级慢，大约两分钟才能收到邮件
+    * 邮件发送超级慢，大约两分钟才能收到邮件，而且邮件很有可能会在你的垃圾箱里面
 
 ### 登录
 [千语网登录](https://qianyu.herokuapp.com/login)
@@ -24,7 +24,7 @@ course](http://www.saas-class.org) and (non-free)
 [千语网首页](https://qianyu.herokuapp.com)
 * 导航栏：首页、精选、搜索、找朋友、我的、消息、退出
     * 精选：微语点赞排行榜
-    * 找朋友：用户列表，点进用户个人主页可以进行关注
+    * 找朋友：用户列表，管理员可以删除用户，点进用户个人主页可以进行关注
     * 我的 下拉菜单：个人主页、账号设置
         * 个人主页显示当前账户基本信息
         * 账号设置修改当前账户基本信息
