@@ -20,6 +20,9 @@ course](http://www.saas-class.org) and (non-free)
 [千语网登录](https://qianyu.herokuapp.com/login)
 * 账户激活后可以安全登录
 * 记住我选项，使用cookies实现持久会话
+   * 试用用户
+      * 账号：example@railstutorial.org
+      * 密码：111111
 
 ### 首页
 [千语网首页](https://qianyu.herokuapp.com)
